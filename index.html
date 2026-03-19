@@ -1281,6 +1281,14 @@
 				}
 			};
 
+			const getProjectDescription = (repo) => {
+				const repoName = String(repo.name || "").toLowerCase();
+				if (repoName.includes("convolens")) {
+					return "A convolution-focused project exploring signal/image processing workflows and model experimentation.";
+				}
+				return repo.description || "No description added yet.";
+			};
+
 			fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=12`)
 				.then((response) => {
 					if (!response.ok) throw new Error("Could not load repositories");
@@ -1295,10 +1303,11 @@
 					const cards = repos
 						.filter((repo) => !repo.fork)
 						.filter((repo) => !String(repo.name || "").toLowerCase().includes("damo"))
+						.filter((repo) => String(repo.name || "").toLowerCase() !== "website")
 						.slice(0, 6)
 						.map((repo) => {
 							const language = repo.language || "Mixed";
-							const description = repo.description || "No description added yet.";
+							const description = getProjectDescription(repo);
 							return `
 								<div class="project-card">
 									<div class="project-top">
