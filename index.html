@@ -947,7 +947,7 @@
 				<h2>My <span>Projects</span></h2>
 				<p class="section-sub">Apps, web builds, and "I fought the bug and the bug lost" moments.</p>
 			</div>
-			<div class="grid-3">
+			<div class="grid-3" id="projects-grid">
 				<div class="project-card">
 					<div class="project-top">
 						<div class="project-icon">🎮</div>
@@ -1003,16 +1003,9 @@
 					<p>Currently exploring LLM integrations and prompt engineering tools. Something new is in the works.</p>
 					<div class="project-tags"><span>LLMs</span><span>Python</span><span>AI</span></div>
 				</div>
-			</div>
-
-			<div class="section-head" style="margin-top:26px;">
-				<h3 style="font-size:1.05rem;">Latest from <span>GitHub</span></h3>
-				<p class="section-sub">Auto-updates from my public repositories.</p>
-			</div>
-			<div class="grid-3" id="github-projects-grid">
-				<div class="project-card" style="opacity:0.75;">
-					<h3>Loading GitHub projects…</h3>
-					<p>Fetching latest repositories.</p>
+				<div class="project-card" id="github-loading-card" style="opacity:0.75;">
+					<h3>Loading GitHub Projects…</h3>
+					<p>Adding your latest repositories to this Projects section.</p>
 				</div>
 			</div>
 		</div>
@@ -1260,8 +1253,9 @@
 	<script>
 		(function () {
 			const githubUser = "Damola-png";
-			const grid = document.getElementById("github-projects-grid");
+			const grid = document.getElementById("projects-grid");
 			if (!grid) return;
+			const loadingCard = document.getElementById("github-loading-card");
 
 			const getIcon = (language) => {
 				const lang = (language || "").toLowerCase();
@@ -1282,16 +1276,12 @@
 					.replaceAll("'", "&#039;");
 
 			const fallbackCard = (title, text) => {
-				grid.innerHTML = `
-					<div class="project-card" style="opacity:0.9;">
-						<h3>${escapeHtml(title)}</h3>
-						<p>${escapeHtml(text)}</p>
-						<a class="btn btn-ghost" href="https://github.com/${githubUser}?tab=repositories" target="_blank" style="font-size:0.82rem;padding:8px 14px;margin-top:8px;">View GitHub Repos ↗</a>
-					</div>
-				`;
+				if (loadingCard) {
+					loadingCard.innerHTML = `<h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p>`;
+				}
 			};
 
-			fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=6`)
+			fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=12`)
 				.then((response) => {
 					if (!response.ok) throw new Error("Could not load repositories");
 					return response.json();
@@ -1304,6 +1294,7 @@
 
 					const cards = repos
 						.filter((repo) => !repo.fork)
+						.filter((repo) => !String(repo.name || "").toLowerCase().includes("damo"))
 						.slice(0, 6)
 						.map((repo) => {
 							const language = repo.language || "Mixed";
@@ -1316,22 +1307,22 @@
 									</div>
 									<h3>${escapeHtml(repo.name)}</h3>
 									<p>${escapeHtml(description)}</p>
-									<div class="project-tags"><span>GitHub</span><span>Updated</span></div>
-									<a class="btn btn-ghost" href="${repo.html_url}" target="_blank" style="font-size:0.82rem;padding:8px 14px;margin-top:8px;">View Repo ↗</a>
+									<div class="project-tags"><span>GitHub</span><span>Auto</span></div>
 								</div>
 							`;
 						})
 						.join("");
 
 					if (!cards) {
-						fallbackCard("No non-fork repositories yet", "Create or unpin projects on GitHub to show them here.");
+						fallbackCard("No matching repositories", "No GitHub repos to add after current filters.");
 						return;
 					}
 
-					grid.innerHTML = cards;
+					if (loadingCard) loadingCard.remove();
+					grid.insertAdjacentHTML("beforeend", cards);
 				})
 				.catch(() => {
-					fallbackCard("Could not load GitHub projects", "Open GitHub to view all repositories.");
+					fallbackCard("Could not load GitHub projects", "GitHub projects will appear here when connection is available.");
 				});
 		})();
 	</script>
