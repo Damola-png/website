@@ -1004,6 +1004,17 @@
 					<div class="project-tags"><span>LLMs</span><span>Python</span><span>AI</span></div>
 				</div>
 			</div>
+
+			<div class="section-head" style="margin-top:26px;">
+				<h3 style="font-size:1.05rem;">Latest from <span>GitHub</span></h3>
+				<p class="section-sub">Auto-updates from my public repositories.</p>
+			</div>
+			<div class="grid-3" id="github-projects-grid">
+				<div class="project-card" style="opacity:0.75;">
+					<h3>Loading GitHub projects…</h3>
+					<p>Fetching latest repositories.</p>
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -1096,13 +1107,6 @@
 				<div class="card">
 					<h3>Published Articles</h3>
 					<div class="media-row" style="margin-top:12px;">
-						<div class="media-item">
-							<span class="media-icon">📰</span>
-							<div>
-								<div style="font-size:0.88rem;">Campus Leadership Profile</div>
-								<span>Student government coverage</span>
-							</div>
-						</div>
 						<a class="media-item" href="Prin%20Rugby%20changes%20leave%20players%20uncertain%20(1).pdf" download>
 							<span class="media-icon">🏉</span>
 							<div>
@@ -1110,55 +1114,41 @@
 								<span>Download PDF ↓</span>
 							</div>
 						</a>
-						<div class="media-item">
+						<a class="media-item" href="Sport%20Roundup.pdf" download>
 							<span class="media-icon">🗞️</span>
 							<div>
 								<div style="font-size:0.88rem;">Sport Roundup</div>
-								<span>Writing project</span>
+								<span>Download PDF ↓</span>
 							</div>
-						</div>
-						<div class="media-item">
+						</a>
+						<a class="media-item" href="Winter%20sports%20%20(1).pdf" download>
 							<span class="media-icon">❄️</span>
 							<div>
 								<div style="font-size:0.88rem;">Winter Sports</div>
-								<span>Writing project</span>
+								<span>Download PDF ↓</span>
 							</div>
-						</div>
-						<div class="media-item">
+						</a>
+						<a class="media-item" href="The%20Palace%20Project%20%20%20%20%20%20%20%20%20%20%20%20%20.pdf" download>
 							<span class="media-icon">🏛️</span>
 							<div>
 								<div style="font-size:0.88rem;">The Palace Project</div>
-								<span>Feature writing project</span>
+								<span>Download PDF ↓</span>
 							</div>
-						</div>
-						<div class="media-item">
+						</a>
+						<a class="media-item" href="Student%20Body%20Government%20%20(1).pdf" download>
 							<span class="media-icon">🏫</span>
 							<div>
 								<div style="font-size:0.88rem;">Student Body Government</div>
-								<span>Campus leadership coverage</span>
+								<span>Download PDF ↓</span>
 							</div>
-						</div>
-						<div class="media-item">
+						</a>
+						<a class="media-item" href="Student%20Body%20President%20and%20Vice_DamolaOlayefun%20%20(2).pdf" download>
 							<span class="media-icon">🎓</span>
 							<div>
 								<div style="font-size:0.88rem;">Student Body President and Vice</div>
-								<span>Leadership profile writing</span>
+								<span>Download PDF ↓</span>
 							</div>
-						</div>
-						<div class="media-item">
-							<span class="media-icon">✍️</span>
-							<div>
-								<div style="font-size:0.88rem;">Damola Olayefun</div>
-								<span>Byline / author project</span>
-							</div>
-						</div>
-						<div class="media-item">
-							<span class="media-icon">📝</span>
-							<div>
-								<div style="font-size:0.88rem;">Ongoing News Reporting</div>
-								<span>Campus & community pieces</span>
-							</div>
-						</div>
+						</a>
 					</div>
 				</div>
 				<div class="card">
@@ -1266,6 +1256,85 @@
 		<p>© 2025 Adedamola Olayefun</p>
 		<p style="margin-top:4px;" class="mono" style="font-size:0.8rem;">Built with HTML · CSS · JS · Deployed on Netlify</p>
 	</footer>
+
+	<script>
+		(function () {
+			const githubUser = "Damola-png";
+			const grid = document.getElementById("github-projects-grid");
+			if (!grid) return;
+
+			const getIcon = (language) => {
+				const lang = (language || "").toLowerCase();
+				if (lang.includes("java")) return "☕";
+				if (lang.includes("python")) return "🐍";
+				if (lang.includes("javascript") || lang.includes("typescript")) return "🟨";
+				if (lang.includes("html") || lang.includes("css")) return "🌐";
+				if (lang.includes("c++") || lang === "c") return "⚙️";
+				return "📦";
+			};
+
+			const escapeHtml = (value) =>
+				String(value)
+					.replaceAll("&", "&amp;")
+					.replaceAll("<", "&lt;")
+					.replaceAll(">", "&gt;")
+					.replaceAll('"', "&quot;")
+					.replaceAll("'", "&#039;");
+
+			const fallbackCard = (title, text) => {
+				grid.innerHTML = `
+					<div class="project-card" style="opacity:0.9;">
+						<h3>${escapeHtml(title)}</h3>
+						<p>${escapeHtml(text)}</p>
+						<a class="btn btn-ghost" href="https://github.com/${githubUser}?tab=repositories" target="_blank" style="font-size:0.82rem;padding:8px 14px;margin-top:8px;">View GitHub Repos ↗</a>
+					</div>
+				`;
+			};
+
+			fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=6`)
+				.then((response) => {
+					if (!response.ok) throw new Error("Could not load repositories");
+					return response.json();
+				})
+				.then((repos) => {
+					if (!Array.isArray(repos) || repos.length === 0) {
+						fallbackCard("No public repositories found", "Add projects on GitHub and they will appear here automatically.");
+						return;
+					}
+
+					const cards = repos
+						.filter((repo) => !repo.fork)
+						.slice(0, 6)
+						.map((repo) => {
+							const language = repo.language || "Mixed";
+							const description = repo.description || "No description added yet.";
+							return `
+								<div class="project-card">
+									<div class="project-top">
+										<div class="project-icon">${getIcon(language)}</div>
+										<span class="project-lang">${escapeHtml(language)}</span>
+									</div>
+									<h3>${escapeHtml(repo.name)}</h3>
+									<p>${escapeHtml(description)}</p>
+									<div class="project-tags"><span>GitHub</span><span>Updated</span></div>
+									<a class="btn btn-ghost" href="${repo.html_url}" target="_blank" style="font-size:0.82rem;padding:8px 14px;margin-top:8px;">View Repo ↗</a>
+								</div>
+							`;
+						})
+						.join("");
+
+					if (!cards) {
+						fallbackCard("No non-fork repositories yet", "Create or unpin projects on GitHub to show them here.");
+						return;
+					}
+
+					grid.innerHTML = cards;
+				})
+				.catch(() => {
+					fallbackCard("Could not load GitHub projects", "Open GitHub to view all repositories.");
+				});
+		})();
+	</script>
 
 </body>
 </html>
