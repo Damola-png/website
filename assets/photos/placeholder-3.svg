@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#22c55e" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="n">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0.2"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.15"/></feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <rect width="1200" height="800" filter="url(#n)"/>
+  <circle cx="260" cy="220" r="140" fill="rgba(255,255,255,0.12)"/>
+  <circle cx="980" cy="590" r="220" fill="rgba(255,255,255,0.08)"/>
+  <path d="M80 720 C 260 520, 460 860, 640 660 C 820 460, 980 760, 1120 560" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="10" stroke-linecap="round"/>
+  <text x="70" y="110" font-family="IBM Plex Mono, monospace" font-size="34" fill="rgba(255,255,255,0.85)">PHOTO SLOT 03</text>
+  <text x="70" y="155" font-family="IBM Plex Mono, monospace" font-size="18" fill="rgba(255,255,255,0.70)">Replace with your own photo — assets/photos</text>
+</svg>

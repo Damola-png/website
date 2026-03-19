@@ -1,0 +1,11 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/home"
+  to = "/#top"
+  status = 301
+
+
+
+  status= 2

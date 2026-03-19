@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adedamola Olayefun — CS & Media</title>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #0a0a0f;
+			--bg2: #111118;
+			--bg3: #1a1a24;
+			--border: rgba(255,255,255,0.08);
+			--accent: #7c6af7;
+			--accent2: #a78bfa;
+			--accent3: #38bdf8;
+			--text: #e2e8f0;
+			--muted: #94a3b8;
+			--card: rgba(255,255,255,0.04);
+			--card-hover: rgba(255,255,255,0.07);
+			--glow: rgba(124,106,247,0.15);
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			font-family: 'Space Grotesk', sans-serif;
+			background: var(--bg);
+			color: var(--text);
+			line-height: 1.6;
+			overflow-x: hidden;
+		}
+		/* BG */
+		.bg-glow {
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			z-index: 0;
+			background: radial-gradient(ellipse 80% 50% at 20% 10%, rgba(124,106,247,0.12) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(56,189,248,0.08) 0%, transparent 60%);
+		}
+		/* NAV */
+		nav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 100;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 16px 40px;
+			background: rgba(10,10,15,0.8);
+			backdrop-filter: blur(20px);
+			border-bottom: 1px solid var(--border);
+		}
+
+		.nav-brand {
+			font-weight: 700;
+			font-size: 1.1rem;
+			color: var(--text);
+			text-decoration: none;
+			letter-spacing: -0.5px;
+		}
+
+			.nav-brand span {
+				color: var(--accent);
+			}
+
+		.nav-links {
+			display: flex;
+			gap: 32px;
+			list-style: none;
+		}
+
+			.nav-links a {
+				color: var(--muted);
+				text-decoration: none;
+				font-size: 0.9rem;
+				font-weight: 500;
+				transition: color 0.2s;
+				letter-spacing: 0.3px;
+			}
+
+				.nav-links a:hover {
+					color: var(--text);
+				}
+		/* SECTIONS */
+		section {
+			position: relative;
+			z-index: 1;
+		}
+		/* HERO */
+		.hero {
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			padding: 120px 40px 80px;
+			max-width: 1100px;
+			margin: 0 auto;
+			gap: 60px;
+		}
+
+		.hero-left {
+			flex: 1.2;
+		}
+
+		.hero-right {
+			flex: 0.8;
+			display: flex;
+			justify-content: center;
+		}
+
+		.kicker {
+			display: flex;
+			gap: 8px;
+			margin-bottom: 24px;
+			flex-wrap: wrap;
+		}
+
+			.kicker span {
+				font-size: 0.78rem;
+				font-family: 'IBM Plex Mono', monospace;
+				padding: 4px 12px;
+				border-radius: 20px;
+				border: 1px solid var(--border);
+				color: var(--muted);
+				background: var(--card);
+			}
+
+		.hero h1 {
+			font-size: clamp(2.2rem, 5vw, 3.8rem);
+			font-weight: 700;
+			line-height: 1.15;
+			letter-spacing: -1.5px;
+			margin-bottom: 20px;
+		}
+
+			.hero h1 .accent {
+				color: var(--accent2);
+			}
+
+		.hero-sub {
+			font-size: 1.05rem;
+			color: var(--muted);
+			max-width: 520px;
+			margin-bottom: 36px;
+			line-height: 1.7;
+		}
+
+			.hero-sub strong {
+				color: var(--text);
+			}
+
+		.btn-row {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			margin-bottom: 32px;
+		}
+
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 12px 24px;
+			border-radius: 10px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			text-decoration: none;
+			transition: all 0.2s;
+			font-family: 'Space Grotesk', sans-serif;
+			cursor: pointer;
+			border: none;
+		}
+
+		.btn-primary {
+			background: var(--accent);
+			color: #fff;
+			box-shadow: 0 0 20px rgba(124,106,247,0.3);
+			position: relative;
+			overflow: hidden;
+		}
+
+			.btn-primary::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 0;
+				height: 0;
+				border-radius: 50%;
+				background: rgba(255,255,255,0.1);
+				transform: translate(-50%, -50%);
+				transition: width 0.5s, height 0.5s;
+			}
+
+			.btn-primary:hover::before {
+				width: 300px;
+				height: 300px;
+			}
+
+			.btn-primary:hover {
+				background: var(--accent2);
+				transform: translateY(-2px);
+				box-shadow: 0 0 40px rgba(124,106,247,0.5);
+			}
+
+		.btn-ghost {
+			background: var(--card);
+			color: var(--text);
+			border: 1px solid var(--border);
+		}
+
+			.btn-ghost:hover {
+				background: var(--card-hover);
+				border-color: var(--accent);
+			}
+
+		.chip-row {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.chip {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 7px 14px;
+			border-radius: 8px;
+			font-size: 0.82rem;
+			font-weight: 500;
+			text-decoration: none;
+			color: var(--muted);
+			background: var(--card);
+			border: 1px solid var(--border);
+			transition: all 0.2s;
+			position: relative;
+		}
+
+			.chip:hover {
+				color: var(--text);
+				border-color: var(--accent);
+				background: var(--card-hover);
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(124,106,247,0.2);
+			}
+		/* HERO CARD */
+		.hero-card {
+			background: var(--bg3);
+			border: 1px solid var(--border);
+			border-radius: 20px;
+			padding: 28px;
+			width: 300px;
+			position: relative;
+			overflow: hidden;
+			box-shadow: 0 0 60px rgba(124,106,247,0.1);
+			animation: float 6s ease-in-out infinite;
+		}
+
+			.hero-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background: linear-gradient(90deg, var(--accent), var(--accent3));
+			}
+
+		.status-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: #22c55e;
+			box-shadow: 0 0 8px #22c55e;
+			animation: pulse 2s infinite;
+		}
+
+		@keyframes pulse {
+			0%,100% {
+				opacity: 1
+			}
+
+			50% {
+				opacity: 0.5
+			}
+		}
+
+		@keyframes float {
+			0%, 100% {
+				transform: translateY(0px);
+			}
+			50% {
+				transform: translateY(-10px);
+			}
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.status-row {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin-bottom: 20px;
+		}
+
+		.status-text {
+			font-size: 0.78rem;
+			color: var(--muted);
+			font-family: 'IBM Plex Mono', monospace;
+		}
+
+		.focus-list {
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+			.focus-list li {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				font-size: 0.85rem;
+				color: var(--muted);
+			}
+
+		.focus-tag {
+			font-size: 0.7rem;
+			font-family: 'IBM Plex Mono', monospace;
+			padding: 2px 8px;
+			border-radius: 4px;
+			background: rgba(124,106,247,0.15);
+			color: var(--accent2);
+			border: 1px solid rgba(124,106,247,0.2);
+			white-space: nowrap;
+		}
+
+		.mono {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 0.75rem;
+			color: var(--muted);
+		}
+
+		.sig {
+			font-size: 1.4rem;
+			font-style: italic;
+			color: var(--accent2);
+			margin-top: 4px;
+		}
+
+		.divider-line {
+			border: none;
+			border-top: 1px solid var(--border);
+			margin: 16px 0;
+		}
+		/* SECTION WRAPPER */
+		.section-wrap {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 80px 40px;
+		}
+
+		.section-head {
+			margin-bottom: 48px;
+		}
+
+			.section-head h2 {
+				font-size: clamp(1.6rem, 3vw, 2.2rem);
+				font-weight: 700;
+				letter-spacing: -0.8px;
+				margin-bottom: 8px;
+			}
+
+				.section-head h2 span {
+					color: var(--accent);
+				}
+
+		.section-sub {
+			color: var(--muted);
+			font-size: 1rem;
+			max-width: 500px;
+		}
+		/* GRID */
+		.grid-2 {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+			gap: 20px;
+		}
+
+		.grid-3 {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+			gap: 20px;
+		}
+		/* CARD */
+		.card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 16px;
+			padding: 28px;
+			transition: all 0.25s;
+			opacity: 0;
+			animation: fadeIn 0.6s ease-out forwards;
+		}
+
+			.card:hover {
+				background: var(--card-hover);
+				border-color: rgba(124,106,247,0.3);
+				transform: translateY(-4px);
+				box-shadow: 0 8px 30px rgba(124,106,247,0.15);
+			}
+
+			.card h3 {
+				font-size: 1rem;
+				font-weight: 600;
+				margin-bottom: 12px;
+				color: var(--text);
+			}
+
+			.card p {
+				color: var(--muted);
+				font-size: 0.92rem;
+				line-height: 1.7;
+				margin-bottom: 10px;
+			}
+		/* TAG CLOUD */
+		.tag-cloud {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+			margin-top: 14px;
+		}
+
+			.tag-cloud span {
+				font-size: 0.75rem;
+				padding: 4px 10px;
+				border-radius: 6px;
+				background: rgba(124,106,247,0.1);
+				color: var(--accent2);
+				border: 1px solid rgba(124,106,247,0.2);
+			}
+		/* PROJECT CARD */
+		.project-card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 16px;
+			padding: 24px;
+			transition: all 0.25s;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			opacity: 0;
+			animation: fadeIn 0.6s ease-out forwards;
+		}
+
+			.project-card:hover {
+				background: var(--card-hover);
+				border-color: rgba(124,106,247,0.4);
+				transform: translateY(-5px) scale(1.02);
+				box-shadow: 0 12px 40px rgba(124,106,247,0.2), 0 0 20px rgba(124,106,247,0.1);
+			}
+
+		.project-top {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+
+		.project-icon {
+			width: 44px;
+			height: 44px;
+			border-radius: 12px;
+			background: rgba(124,106,247,0.15);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.3rem;
+			border: 1px solid rgba(124,106,247,0.2);
+			transition: all 0.3s ease;
+		}
+
+		.project-card:hover .project-icon {
+			transform: scale(1.1) rotate(5deg);
+			background: rgba(124,106,247,0.25);
+			box-shadow: 0 0 20px rgba(124,106,247,0.3);
+		}
+
+		.project-lang {
+			font-size: 0.72rem;
+			font-family: 'IBM Plex Mono', monospace;
+			padding: 3px 8px;
+			border-radius: 4px;
+			background: var(--bg3);
+			color: var(--muted);
+			border: 1px solid var(--border);
+		}
+
+		.project-card h3 {
+			font-size: 1rem;
+			font-weight: 600;
+			color: var(--text);
+		}
+
+		.project-card p {
+			font-size: 0.87rem;
+			color: var(--muted);
+			line-height: 1.6;
+			flex: 1;
+		}
+
+		.project-tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 6px;
+		}
+
+			.project-tags span {
+				font-size: 0.72rem;
+				padding: 3px 8px;
+				border-radius: 4px;
+				background: var(--bg3);
+				color: var(--muted);
+				border: 1px solid var(--border);
+			}
+		/* ABOUT BULLETS */
+		.bullets {
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+			.bullets li {
+				display: flex;
+				gap: 10px;
+				font-size: 0.9rem;
+				color: var(--muted);
+			}
+
+				.bullets li::before {
+					content: '→';
+					color: var(--accent);
+					flex-shrink: 0;
+					margin-top: 1px;
+				}
+
+			.bullets strong {
+				color: var(--text);
+			}
+		/* MEDIA CARD */
+		.media-row {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.media-item {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 12px 14px;
+			border-radius: 10px;
+			background: var(--bg3);
+			border: 1px solid var(--border);
+			text-decoration: none;
+			color: var(--text);
+			transition: all 0.2s;
+			font-size: 0.88rem;
+		}
+
+			.media-item:hover {
+				border-color: var(--accent);
+				background: var(--card-hover);
+			}
+
+			.media-item .media-icon {
+				font-size: 1rem;
+				width: 20px;
+				text-align: center;
+			}
+
+			.media-item span {
+				color: var(--muted);
+				font-size: 0.82rem;
+			}
+		/* RESUME CARD */
+		.resume-card {
+			background: var(--card);
+			border: 1px solid var(--border);
+			border-radius: 16px;
+			padding: 28px;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			transition: all 0.25s;
+		}
+
+			.resume-card:hover {
+				border-color: rgba(124,106,247,0.3);
+			}
+
+		.resume-top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.pill {
+			font-size: 0.7rem;
+			padding: 3px 10px;
+			border-radius: 20px;
+			background: rgba(124,106,247,0.15);
+			color: var(--accent2);
+			border: 1px solid rgba(124,106,247,0.25);
+			font-family: 'IBM Plex Mono', monospace;
+		}
+		/* CONTACT */
+		.contact-link {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 14px 18px;
+			border-radius: 12px;
+			background: var(--bg3);
+			border: 1px solid var(--border);
+			text-decoration: none;
+			color: var(--text);
+			font-size: 0.9rem;
+			transition: all 0.2s;
+			margin-bottom: 10px;
+		}
+
+			.contact-link:hover {
+				border-color: var(--accent);
+				background: var(--card-hover);
+			}
+
+		.contact-icon {
+			font-size: 1.1rem;
+			width: 24px;
+			text-align: center;
+		}
+		/* FOOTER */
+		footer {
+			border-top: 1px solid var(--border);
+			padding: 32px 40px;
+			text-align: center;
+			color: var(--muted);
+			font-size: 0.85rem;
+			position: relative;
+			z-index: 1;
+		}
+		/* EXPERIENCE TIMELINE */
+		.timeline {
+			display: flex;
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.timeline-item {
+			display: flex;
+			gap: 20px;
+			padding-bottom: 28px;
+			position: relative;
+		}
+
+			.timeline-item:last-child {
+				padding-bottom: 0;
+			}
+
+		.timeline-left {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 40px;
+			flex-shrink: 0;
+		}
+
+		.timeline-dot {
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			background: var(--accent);
+			border: 2px solid var(--bg);
+			box-shadow: 0 0 10px var(--accent);
+			flex-shrink: 0;
+			margin-top: 4px;
+		}
+
+		.timeline-line {
+			width: 1px;
+			flex: 1;
+			background: var(--border);
+			margin-top: 4px;
+		}
+
+		.timeline-item:last-child .timeline-line {
+			display: none;
+		}
+
+		.timeline-content {
+			flex: 1;
+		}
+
+		.timeline-title {
+			font-weight: 600;
+			font-size: 0.95rem;
+			margin-bottom: 2px;
+		}
+
+		.timeline-org {
+			color: var(--accent2);
+			font-size: 0.85rem;
+			margin-bottom: 4px;
+		}
+
+		.timeline-date {
+			color: var(--muted);
+			font-size: 0.78rem;
+			font-family: 'IBM Plex Mono', monospace;
+			margin-bottom: 8px;
+		}
+
+		.timeline-desc {
+			color: var(--muted);
+			font-size: 0.87rem;
+			line-height: 1.6;
+		}
+		/* SECTION DIVIDER */
+		.section-divider {
+			border: none;
+			border-top: 1px solid var(--border);
+			max-width: 1100px;
+			margin: 0 auto;
+		}
+
+		@keyframes rotate {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		/* Photo hover effect */
+		.profile-photo-wrapper:hover {
+			transform: scale(1.05);
+			box-shadow: 0 0 50px rgba(124,106,247,0.5), 0 0 100px rgba(124,106,247,0.3) !important;
+		}
+		/* RESPONSIVE */
+		@media (max-width: 768px) {
+			nav {
+				padding: 14px 20px;
+			}
+
+			.nav-links {
+				display: none;
+			}
+
+			.hero {
+				flex-direction: column;
+				padding: 100px 20px 60px;
+				gap: 40px;
+			}
+
+			.hero-right {
+				display: none;
+			}
+
+			.section-wrap {
+				padding: 60px 20px;
+			}
+
+			.grid-2, .grid-3 {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<div class="bg-glow"></div>
+
+	<!-- NAV -->
+	<nav>
+		<a class="nav-brand" href="#top"><span>AO</span> · Adedamola Olayefun</a>
+		<ul class="nav-links">
+			<li><a href="#about">About</a></li>
+			<li><a href="#projects">Projects</a></li>
+			<li><a href="#experience">Experience</a></li>
+			<li><a href="#media">Media</a></li>
+			<li><a href="#resume">Resume</a></li>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+	</nav>
+
+	<!-- HERO -->
+	<section id="top">
+		<div class="hero">
+			<div class="hero-left">
+				<div class="kicker">
+					<span>📍 Elsah, Illinois</span>
+					<span>CS • Media/Journalism</span>
+					<span>Open to Internships</span>
+				</div>
+				<h1>I build things that <span class="accent">work</span> — and stories that <span class="accent">stick</span>.</h1>
+				<p class="hero-sub">
+					I'm <strong>Adedamola Olayefun</strong> — a CS & Mass Communication student at Principia College.
+					I write code and I write stories. I build systems and I study how people communicate.
+					This is what I've shipped.
+				</p>
+				<div class="btn-row">
+					<a class="btn btn-primary" href="#projects">See Projects ↗</a>
+					<a class="btn btn-ghost" href="#contact">Get in Touch →</a>
+				</div>
+				<div class="chip-row">
+					<a class="chip" href="mailto:damolaolayefun@gmail.com">✉ Email</a>
+					<a class="chip" href="https://github.com/Damola-png?tab=repositories" target="_blank">⌁ GitHub</a>
+					<a class="chip" href="https://dontduicampaign.netlify.app/" target="_blank">⚑ DUI Campaign</a>
+					<a class="chip" href="tel:+13143866732">☎ Call</a>
+				</div>
+			</div>
+
+			<div class="hero-right">
+				<div class="hero-card">
+					<div class="status-row">
+						<div class="status-dot"></div>
+						<span class="status-text">Currently building · v1.0</span>
+					</div>
+					<hr class="divider-line">
+					<div class="mono" style="margin-bottom:10px;">selected focus</div>
+					<ul class="focus-list">
+						<li><span class="focus-tag">apps</span> Java · JS · C++</li>
+						<li><span class="focus-tag">AI</span> Prompt Eng · LLMs</li>
+						<li><span class="focus-tag">media</span> Doc · Audio · Photo</li>
+						<li><span class="focus-tag">systems</span> Assembly · Optimization</li>
+					</ul>
+					<hr class="divider-line">
+					<div class="mono">signature</div>
+					<div class="sig">— AO</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="section-divider">
+
+	<!-- ABOUT -->
+	<section id="about">
+		<div class="section-wrap">
+			<div class="section-head">
+				<h2>About <span>Me</span></h2>
+				<p class="section-sub">The human behind the keyboard — and the camera.</p>
+			</div>
+			<div class="grid-2">
+				<div class="card">
+					<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">
+						<div class="profile-photo-wrapper" style="
+			width:200px;height:200px;border-radius:50%;
+			border:4px solid var(--accent);
+			box-shadow:0 0 40px rgba(124,106,247,0.4), 0 0 80px rgba(124,106,247,0.2);
+			overflow:hidden;background:var(--bg3);
+			display:flex;align-items:center;justify-content:center;
+			position:relative;
+			transition: all 0.3s ease;
+			cursor: pointer;
+		  ">
+							<!-- Decorative rotating ring -->
+							<div style="
+			  position:absolute;
+			  width:220px;height:220px;
+			  border-radius:50%;
+			  border:2px solid transparent;
+			  border-top-color:var(--accent3);
+			  border-right-color:var(--accent3);
+			  opacity:0.3;
+			  animation: rotate 8s linear infinite;
+			  pointer-events:none;
+			"></div>
+							<img src="photo.jpeg"
+								 alt="Adedamola Olayefun"
+								 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+								 style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+							<div style="
+              display:none;flex-direction:column;align-items:center;justify-content:center;
+              width:100%;height:100%;color:var(--muted);font-size:0.75rem;text-align:center;
+              padding:10px;gap:6px;
+            ">
+								<span style="font-size:2rem;">📷</span>
+								<span style="font-family:'IBM Plex Mono',monospace;">Add your photo</span>
+							</div>
+						</div>
+						<div style="margin-top:12px;text-align:center;">
+							<div style="font-weight:600;font-size:1rem;">Adedamola Olayefun</div>
+							<div style="color:var(--accent2);font-size:0.82rem;font-family:'IBM Plex Mono',monospace;">CS · Media · AI Enthusiast</div>
+						</div>
+					</div>
+					<h3>My Story</h3>
+					<p>I'm a Computer Science and Mass Communication student at Principia College who builds things and explains them clearly — a combination that's rarer than it sounds.</p>
+					<p>I've led teams of 100+ people, published campus journalism, built AI-powered game systems in Java, and deployed my own websites. I'm most interested in the space where technology meets human communication — AI tools, product development, and anything that makes complex things feel simple.</p>
+					<p>Currently seeking internships in AI, prompt engineering, and software development. Always building something new.</p>
+				</div>
+				<div class="card">
+					<h3>What I'm Good At</h3>
+					<ul class="bullets">
+						<li><strong>Software:</strong> Java, JavaScript, C++, Python, Git, Linux</li>
+						<li><strong>AI:</strong> Prompt engineering, LLM evaluation, behavioral analysis</li>
+						<li><strong>Web:</strong> Clean UI, responsive layouts, Netlify deployments</li>
+						<li><strong>Media:</strong> Writing, interviewing, documentary, audio, photography, Adobe CC</li>
+					</ul>
+					<div class="tag-cloud">
+						<span>Java</span><span>Python</span><span>JavaScript</span><span>C++</span>
+						<span>Prompt Eng</span><span>HTML/CSS</span><span>Git</span>
+						<span>Storytelling</span><span>Photography</span><span>Adobe</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="section-divider">
+
+	<!-- PROJECTS -->
+	<section id="projects">
+		<div class="section-wrap">
+			<div class="section-head">
+				<h2>My <span>Projects</span></h2>
+				<p class="section-sub">Apps, web builds, and "I fought the bug and the bug lost" moments.</p>
+			</div>
+			<div class="grid-3">
+				<div class="project-card">
+					<div class="project-top">
+						<div class="project-icon">🎮</div>
+						<span class="project-lang">Java</span>
+					</div>
+					<h3>Brick Breaker</h3>
+					<p>Classic arcade game built with OOP principles. Handles collision detection, score tracking, and dynamic difficulty. Tested edge cases thoroughly to prevent invalid game states.</p>
+					<div class="project-tags"><span>Java</span><span>OOP</span><span>Game Dev</span></div>
+				</div>
+				<div class="project-card">
+					<div class="project-top">
+						<div class="project-icon">🤖</div>
+						<span class="project-lang">Java</span>
+					</div>
+					<h3>Tic Tac Toe + AI</h3>
+					<p>Two-player game with an AI opponent using decision logic. The AI evaluates board states and makes strategic moves. Modeled predictable vs. unpredictable user behavior.</p>
+					<div class="project-tags"><span>Java</span><span>AI Logic</span><span>OOP</span></div>
+				</div>
+				<div class="project-card">
+					<div class="project-top">
+						<div class="project-icon">📝</div>
+						<span class="project-lang">Java</span>
+					</div>
+					<h3>Hangman</h3>
+					<p>Word-guessing game with full input validation, win/loss tracking, and clean interaction design. Focused on preventing invalid states and handling unexpected user input gracefully.</p>
+					<div class="project-tags"><span>Java</span><span>Input Validation</span><span>OOP</span></div>
+				</div>
+				<div class="project-card">
+					<div class="project-top">
+						<div class="project-icon">🚫</div>
+						<span class="project-lang">Web</span>
+					</div>
+					<h3>DUI Awareness Campaign</h3>
+					<p>A fully deployed public awareness web campaign. Clean, responsive design with a clear message. Built and live on Netlify.</p>
+					<div class="project-tags"><span>HTML/CSS</span><span>Netlify</span><span>Campaign</span></div>
+					<a class="btn btn-ghost" href="https://dontduicampaign.netlify.app/" target="_blank" style="font-size:0.82rem;padding:8px 14px;margin-top:4px;">View Live ↗</a>
+				</div>
+				<div class="project-card">
+					<div class="project-top">
+						<div class="project-icon">🌐</div>
+						<span class="project-lang">Web</span>
+					</div>
+					<h3>This Portfolio</h3>
+					<p>Designed and built from scratch using plain HTML, CSS, and JavaScript. Deployed on Netlify with a custom domain. Features dark mode, smooth animations, and responsive layout.</p>
+					<div class="project-tags"><span>HTML/CSS/JS</span><span>Netlify</span><span>UI Design</span></div>
+				</div>
+				<div class="project-card" style="border-style:dashed; opacity:0.6;">
+					<div class="project-top">
+						<div class="project-icon">⚙️</div>
+						<span class="project-lang">Coming Soon</span>
+					</div>
+					<h3>Next Project</h3>
+					<p>Currently exploring LLM integrations and prompt engineering tools. Something new is in the works.</p>
+					<div class="project-tags"><span>LLMs</span><span>Python</span><span>AI</span></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="section-divider">
+
+	<!-- EXPERIENCE -->
+	<section id="experience">
+		<div class="section-wrap">
+			<div class="section-head">
+				<h2>Experience <span>&</span> Education</h2>
+				<p class="section-sub">Where I've built things, led people, and learned fast.</p>
+			</div>
+			<div class="grid-2">
+				<div class="card">
+					<h3 style="margin-bottom:24px;">Work Experience</h3>
+					<div class="timeline">
+						<div class="timeline-item">
+							<div class="timeline-left">
+								<div class="timeline-dot"></div>
+								<div class="timeline-line"></div>
+							</div>
+							<div class="timeline-content">
+								<div class="timeline-title">Assistant Director</div>
+								<div class="timeline-org">Cedars Camp</div>
+								<div class="timeline-date">2024 – 2025 · Missouri</div>
+								<div class="timeline-desc">Supervised 100+ participants and 15 staff. Managed high-pressure multi-turn conversations, resolved conflicts, and adapted communication style to different emotional states in real time.</div>
+							</div>
+						</div>
+						<div class="timeline-item">
+							<div class="timeline-left">
+								<div class="timeline-dot"></div>
+								<div class="timeline-line"></div>
+							</div>
+							<div class="timeline-content">
+								<div class="timeline-title">Reporter & Writer</div>
+								<div class="timeline-org">Principia College Newspaper</div>
+								<div class="timeline-date">Ongoing · Elsah, Illinois</div>
+								<div class="timeline-desc">Researched, interviewed sources, and published campus news. Translated complex topics into clear, audience-appropriate language. Managed conflicting perspectives while preserving accuracy.</div>
+							</div>
+						</div>
+						<div class="timeline-item">
+							<div class="timeline-left">
+								<div class="timeline-dot"></div>
+							</div>
+							<div class="timeline-content">
+								<div class="timeline-title">Newsletter Writer & Photographer</div>
+								<div class="timeline-org">Cedars Camp</div>
+								<div class="timeline-date">2024 · Missouri</div>
+								<div class="timeline-desc">Produced feature stories and photography. Adapted tone for emotional, informational, and promotional contexts. Met deadlines while collaborating with staff.</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<h3 style="margin-bottom:20px;">Education</h3>
+					<div style="padding:20px;background:var(--bg3);border-radius:12px;border:1px solid var(--border);margin-bottom:16px;">
+						<div style="font-weight:600;margin-bottom:4px;">Principia College</div>
+						<div style="color:var(--accent2);font-size:0.85rem;margin-bottom:4px;">B.S. Computer Science & Mass Communication</div>
+						<div style="color:var(--muted);font-size:0.78rem;font-family:'IBM Plex Mono',monospace;margin-bottom:12px;">Expected May 2027 · GPA: 3.0 · Elsah, Illinois</div>
+						<div style="font-size:0.82rem;color:var(--muted);">Relevant coursework:</div>
+						<div class="tag-cloud" style="margin-top:8px;">
+							<span>Data Structures</span><span>Algorithms</span><span>OOP</span>
+							<span>Writing for Media</span><span>Visual Communication</span>
+							<span>Linear Algebra</span><span>Calculus</span>
+						</div>
+					</div>
+					<h3 style="margin-bottom:12px;">Activities</h3>
+					<div class="media-item" style="text-decoration:none;">
+						<span class="media-icon">💻</span>
+						<div>
+							<div style="font-size:0.88rem;">Computer Science Club</div>
+							<span>Principia College · Member</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="section-divider">
+
+	<!-- MEDIA -->
+	<section id="media">
+		<div class="section-wrap">
+			<div class="section-head">
+				<h2>Media <span>&</span> Journalism</h2>
+				<p class="section-sub">Writing, documentary work, audio stories, and photography.</p>
+			</div>
+			<div class="grid-2">
+				<div class="card">
+					<h3>Published Articles</h3>
+					<div class="media-row" style="margin-top:12px;">
+						<div class="media-item">
+							<span class="media-icon">📰</span>
+							<div>
+								<div style="font-size:0.88rem;">Campus Leadership Profile</div>
+								<span>Student government coverage</span>
+							</div>
+						</div>
+						<a class="media-item" href="Prin%20Rugby%20changes%20leave%20players%20uncertain%20(1).pdf" download>
+							<span class="media-icon">🏉</span>
+							<div>
+								<div style="font-size:0.88rem;">Sports Feature — Rugby Changes</div>
+								<span>Download PDF ↓</span>
+							</div>
+						</a>
+						<div class="media-item">
+							<span class="media-icon">🗞️</span>
+							<div>
+								<div style="font-size:0.88rem;">Sport Roundup</div>
+								<span>Writing project</span>
+							</div>
+						</div>
+						<div class="media-item">
+							<span class="media-icon">❄️</span>
+							<div>
+								<div style="font-size:0.88rem;">Winter Sports</div>
+								<span>Writing project</span>
+							</div>
+						</div>
+						<div class="media-item">
+							<span class="media-icon">🏛️</span>
+							<div>
+								<div style="font-size:0.88rem;">The Palace Project</div>
+								<span>Feature writing project</span>
+							</div>
+						</div>
+						<div class="media-item">
+							<span class="media-icon">🏫</span>
+							<div>
+								<div style="font-size:0.88rem;">Student Body Government</div>
+								<span>Campus leadership coverage</span>
+							</div>
+						</div>
+						<div class="media-item">
+							<span class="media-icon">🎓</span>
+							<div>
+								<div style="font-size:0.88rem;">Student Body President and Vice</div>
+								<span>Leadership profile writing</span>
+							</div>
+						</div>
+						<div class="media-item">
+							<span class="media-icon">✍️</span>
+							<div>
+								<div style="font-size:0.88rem;">Damola Olayefun</div>
+								<span>Byline / author project</span>
+							</div>
+						</div>
+						<div class="media-item">
+							<span class="media-icon">📝</span>
+							<div>
+								<div style="font-size:0.88rem;">Ongoing News Reporting</div>
+								<span>Campus & community pieces</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<h3>Documentary</h3>
+					<p><strong>Spiritual Retreat Documentary</strong> — a short doc exploring a retreat experience through interviews, ambient sound, and reflective visuals.</p>
+					<div class="tag-cloud" style="margin-top:12px;">
+						<span>Producer / Editor</span><span>Premiere</span><span>Audition</span><span>Lightroom</span><span>Observational</span>
+					</div>
+				</div>
+				<div class="card">
+					<h3>Audio Story — "Voicemail at 2:17"</h3>
+					<p>A mini audio story. Listen inline below.</p>
+					<audio controls preload="metadata" style="width:100%;margin:12px 0;border-radius:8px;">
+						<source src="assets/Damola%20Olayefun_s%20Video%20-%20Oct%2013,%202025-VEED.mp3" type="audio/mpeg" />
+					</audio>
+					<a class="btn btn-ghost" href="assets/Damola%20Olayefun_s%20Video%0-%20Oct%2013,%202025-VEED.mp3" download style="font-size:0.82rem;padding:8px 14px;">
+						Download Audio (7.8 MB) ⬇
+					</a>
+				</div>
+				<div class="card">
+					<h3>Photography</h3>
+					<p>A selection of my photography work — events, portraits, and documentary-style captures from camp and campus.</p>
+					<div style="margin-top:14px;padding:40px 20px;border:2px dashed var(--border);border-radius:10px;text-align:center;color:var(--muted);font-size:0.85rem;">
+						📷 Add your photos here — upload to /assets and link them in
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="section-divider">
+
+	<!-- RESUME -->
+	<section id="resume">
+		<div class="section-wrap">
+			<div class="section-head">
+				<h2>My <span>Resume</span></h2>
+				<p class="section-sub">Computer Science focused — ready for software & AI opportunities.</p>
+			</div>
+			<div class="grid-2">
+				<div class="resume-card">
+					<div class="resume-top">
+						<h3>Computer Science Resume</h3>
+						<span class="pill">PDF</span>
+					</div>
+					<p style="color:var(--muted);font-size:0.88rem;">Java · Python · Git · OOP · Data Structures · Algorithms</p>
+					<div class="mono" style="margin-bottom:8px;color:var(--muted);">📄 Adedamola Olayefun - Resume.pdf</div>
+					<div class="btn-row">
+						<a class="btn btn-primary" href="Adedamola Olayefun - Resume.pdf" target="_blank">Open CS Resume ⬇</a>
+						<a class="btn btn-ghost" href="#contact">Request a Copy →</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<hr class="section-divider">
+
+	<!-- CONTACT -->
+	<section id="contact">
+		<div class="section-wrap">
+			<div class="section-head">
+				<h2>Let's <span>Connect</span></h2>
+				<p class="section-sub">Building something useful? Tell a story worth paying attention to? I'm in.</p>
+			</div>
+			<div class="grid-2">
+				<div class="card">
+					<h3 style="margin-bottom:16px;">Direct Contact</h3>
+					<a class="contact-link" href="mailto:damolaolayefun@gmail.com">
+						<span class="contact-icon">✉</span>
+						<div>
+							<div style="font-size:0.9rem;">damolaolayefun@gmail.com</div>
+							<div style="font-size:0.78rem;color:var(--muted);">Best way to reach me</div>
+						</div>
+					</a>
+					<a class="contact-link" href="tel:+13143866732">
+						<span class="contact-icon">☎</span>
+						<div>
+							<div style="font-size:0.9rem;">+1 (314) 386-6732</div>
+							<div style="font-size:0.78rem;color:var(--muted);">Available for calls</div>
+						</div>
+					</a>
+					<a class="contact-link" href="https://github.com/Damola-png?tab=repositories" target="_blank">
+						<span class="contact-icon">⌁</span>
+						<div>
+							<div style="font-size:0.9rem;">github.com/Damola-png</div>
+							<div style="font-size:0.78rem;color:var(--muted);">See my code</div>
+						</div>
+					</a>
+				</div>
+				<div class="card">
+					<h3 style="margin-bottom:16px;">Send a Message</h3>
+					<div style="display:flex;flex-direction:column;gap:12px;">
+						<input type="text" placeholder="Your name" style="padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;outline:none;" />
+						<input type="email" placeholder="your@email.com" style="padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;outline:none;" />
+						<textarea rows="4" placeholder="What are we building?" style="padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;outline:none;resize:vertical;"></textarea>
+						<a class="btn btn-primary" href="mailto:damolaolayefun@gmail.com" style="text-align:center;justify-content:center;">Send Message →</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<p>© 2025 Adedamola Olayefun</p>
+		<p style="margin-top:4px;" class="mono" style="font-size:0.8rem;">Built with HTML · CSS · JS · Deployed on Netlify</p>
+	</footer>
+
+</body>
+</html>
